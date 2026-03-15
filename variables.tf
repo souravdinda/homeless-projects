@@ -4,11 +4,6 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "aws_profile" {
-  type        = string
-  description = "AWS CLI profile to use for authentication"
-}
-
 variable "project_prefix" {
   type        = string
   description = "Prefix for all resources created by this Terraform"
