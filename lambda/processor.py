@@ -37,7 +37,7 @@ def lambda_handler(event, context):
         anx_df['Normalized_ID'] = anx_df['Homeless ID'].apply(normalize_anxiety_id)
 
         # Merge datasets on the newly aligned ID
-        merged_df = pd.merge(demo_df, anx_df, left_on='HID', right_on='Normalized_ID', how='inner')
+        merged_df = pd.merge(demo_df, anx_df, left_on='HID', right_on='Normalized_ID', how='left')
         merged_df = merged_df.drop_duplicates()
         
         # Convert Encounter Date correctly and drop all unnecessary helper columns
