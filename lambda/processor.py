@@ -39,10 +39,9 @@ def lambda_handler(event, context):
         # Merge datasets on the newly aligned ID
         merged_df = pd.merge(demo_df, anx_df, left_on='HID', right_on='Normalized_ID', how='inner')
         
-        # Add partitioning columns for Athena (Year/Month of encounter)
-        merged_df['Encounter Date'] = pd.to_datetime(merged_df['Encounter Date'])
-        merged_df['year'] = merged_df['Encounter Date'].dt.year.astype(str)
-        merged_df['month'] = merged_df['Encounter Date'].dt.month.astype(str).str.zfill(2)
+        # Convert Encounter Date correctly and drop all unnecessary helper columns
+        merged_df['Encounter Date'] = pd.to_datetime(merged_df['Encounter Date']).dt.strftime('%Y-%m-%d')
+        merged_df = merged_df.drop(columns=['Identifier', 'Normalized_ID'], errors='ignore')
 
         # 3. Save to Processed Bucket as Parquet (Optimized for Athena)
         # Using pyarrow engine for pandas to parquet conversion
