@@ -10,3 +10,5 @@
 .vscode/
 .idea/
 
+.venv/*
+*.csv
