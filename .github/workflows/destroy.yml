@@ -1,16 +1,13 @@
-name: 'Deploy Pilot Infrastructure'
+name: 'Destroy Pilot Infrastructure'
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
-  terraform:
-    name: 'Terraform'
+  terraform_destroy:
+    name: 'Terraform Destroy'
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v6
@@ -32,9 +29,5 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    - name: Terraform Format Check
-      run: terraform fmt -check
-
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
-
+    - name: Terraform Destroy
+      run: terraform destroy -auto-approve
