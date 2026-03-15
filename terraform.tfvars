@@ -1,0 +1,5 @@
+aws_region            = "us-east-1"
+project_prefix        = "e84-pilot"
+glue_database_name    = "e84_homelessness_analytics"
+athena_workgroup_name = "e84AnalyticsWorkgroup"
+aws_profile           = "opeyemi"
