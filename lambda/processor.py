@@ -58,12 +58,11 @@ def lambda_handler(event, context):
             # For the pilot, we assume current date processing. In a real system, 
             # we would loop through and write partitioned files based on the DataFrame's year/month.
             # Simplified here for the pilot writing to a generic path:
-            Key=f'encounters_data/run_{timestamp}.parquet',
+            Key=f'encounters_data/run.parquet',
             Body=out_buffer.getvalue()
         )
 
-        print(f"Successfully processed and wrote run_{timestamp}.parquet to {processed_bucket}")
-
+        print(f"Successfully processed and wrote run.parquet to {processed_bucket}")
         # 4. Trigger the Glue Crawler automatically to update Athena schema
         crawler_name = os.environ.get('CRAWLER_NAME')
         if crawler_name:
