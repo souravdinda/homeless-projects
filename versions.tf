@@ -7,8 +7,7 @@ terraform {
     key          = "pilot/terraform.tfstate"
     region       = "us-east-1"
     encrypt      = true
-    use_lockfile = true                              
-    profile      = "opeyemi"
+    use_lockfile = true
   }
 
   required_providers {
