@@ -16,8 +16,8 @@ resource "aws_iam_role" "lambda_exec" {
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Action = "sts:AssumeRole"
-      Effect = "Allow"
+      Action    = "sts:AssumeRole"
+      Effect    = "Allow"
       Principal = { Service = "lambda.amazonaws.com" }
     }]
   })
@@ -73,7 +73,7 @@ resource "aws_lambda_function" "data_processor" {
     }
   }
 
-  depends_on = [ aws_cloudwatch_log_group.lambda_log_group ]
+  depends_on = [aws_cloudwatch_log_group.lambda_log_group]
 }
 
 # --- S3 Event Notification to trigger Lambda ---
@@ -108,7 +108,7 @@ resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
   statistic           = "Sum"
   threshold           = "0"
   alarm_description   = "This metric monitors Lambda execution errors (e.g. bad CSV format)."
-  
+
   dimensions = {
     FunctionName = aws_lambda_function.data_processor.function_name
   }
